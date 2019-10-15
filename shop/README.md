@@ -3,8 +3,8 @@
 Now it is possible to start a project with Docker, it is easy to set up and you do not mess up with a database. In order to install project this way you have to go through following steps:
 
 ### 0) Prepare your existing git repository 
-Copy the content of this folder (except for 'exclude' and 'README.md') to your CRM repository (path/to/your/crm/, to the folder containing 'crm' and 'etc')
-Copy the content of the 'exclude' file to your git exclude ```path/to/your/crm/.git/info/exclude```
+Copy the content of this folder (except for 'exclude' and 'README.md') to your Shop repository (path/to/your/shop/, to the folder containing 'shop')
+Copy the content of the 'exclude' file to your git exclude ```path/to/your/shop/.git/info/exclude```
 
 ### 1) Install docker and docker-compose
 
@@ -20,15 +20,15 @@ The docker-compose.yml contains the volume and port sections:
                         - 8300:8000
                 volumes:
                         - .:/data
-                        - /path/to/your/dump:/data/crm/dump
-                        - /path/to/your/media:/data/crm/media
+                        - /path/to/your/dump:/data/shop/dump
+                        - /path/to/your/media:/data/shop/media
 ```
 
 Change the port ```8300``` to whatever you like, this is the port your project will be using. Replace ```/path/to/your/dump``` and ```/path/to/your/media``` with the folders containing your media and dump for this project
 
 ### 3) Copy local settings
 
-In the crm/dj/settings_local.py set the database settings (remove previous DB settings):
+In the shop/dj/settings_local.py set the database settings (remove previous DB settings):
 ```python
 import dj_database_url
 
@@ -64,9 +64,9 @@ python alias_cli.py all
 
 ### Hint: don't write always python alias_cli.py
 
-If you don't want to write python alias_cli.py everytime you execute a command, you can make it a shortcut (replace /path/to/your/crm/alias_cli.py with the absolute path to your alias_cli.py):
+If you don't want to write python alias_cli.py everytime you execute a command, you can make it a shortcut (replace /path/to/your/shop/alias_cli.py with the absolute path to your alias_cli.py):
 ```bash
-echo "\nalias crmcli='python /path/to/your/crm/alias_cli.py'" >> ~/.bashrc
+echo "\nalias shopcli='python /path/to/your/shop/alias_cli.py'" >> ~/.bashrc
 ```
 now restart the terminal by writing bash
 ```bash
@@ -74,15 +74,15 @@ bash
 ```
 Now you can just write
 ```bash
-crmcli build
-crmcli migrate
-crmcli all
+shopcli build
+shopcli migrate
+shopcli all
 ...
 ```
 If you are using zsh:
 
 ```bash
-"\nalias crmcli='python /path/to/your/crm/alias_cli.py'" >> ~/.zshrc
+"\nalias shopcli='python /path/to/your/shop/alias_cli.py'" >> ~/.zshrc
 ```
 now restart the terminal by writing zsh
 ```bash

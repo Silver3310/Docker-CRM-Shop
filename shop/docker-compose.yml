@@ -1,0 +1,18 @@
+version: '2'
+services:
+        web:
+                build: .
+                command: python ./shop/manage.py runserver 0.0.0.0:8000
+                ports:
+                        - 8300:8000
+                volumes:
+                        - .:/data
+                        - /path/to/your/dump:/data/shop/dump
+                        - /path/to/your/media:/data/shop/media
+                depends_on:
+                        - db
+                environment:
+                        DATABASE_URL: postgres://postgres@db/postgres
+        db:
+                image: postgres:11.5
+
