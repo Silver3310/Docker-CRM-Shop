@@ -18,7 +18,7 @@ for docker-compose: https://docs.docker.com/compose/install/
 ### 2) Configure docker-compose.yml
 
 The docker-compose.yml contains the volume and port sections:
-```
+```yml
                 ports:
                         - 8300:8000
                 volumes:
@@ -44,7 +44,7 @@ DATABASES = {
 
 For your convenience, the file called alias_cli.py is created, it contains shortcuts for docker-compose commands so you don't have to worry about all the stuff behind it.
 
-```
+```bash
 python alias_cli.py all - run commands in the following order: build, migrate, makemigrations, migrate, loaddata, changeadminpassword, runserver.
 python alias_cli.py build - build the project (docker-compose build)
 python alias_cli.py migrate - migrate all migrations
