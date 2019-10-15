@@ -11,9 +11,9 @@ Copy the content of the 'exclude' file to your git exclude ```path/to/your/crm/.
 
 There is a great tutorial for this over there. Check it out: 
 
-for docker (you may do only the first two steps): https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04 
+for docker (you may do only the first two steps): <https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04> 
 
-for docker-compose: https://docs.docker.com/compose/install/
+for docker-compose: <https://docs.docker.com/compose/install/>
 
 ### 2) Configure docker-compose.yml
 
