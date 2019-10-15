@@ -1,0 +1,18 @@
+version: '2'
+services:
+        web:
+                build: .
+                command: python ./crm/manage.py runserver 0.0.0.0:8000
+                ports:
+                        - 8200:8000
+                volumes:
+                        - .:/data
+                        - /path/to/your/dump:/data/crm/dump
+                        - /path/to/your/media:/data/crm/media
+                depends_on:
+                        - db
+                environment:
+                        DATABASE_URL: postgres://postgres@db/postgres
+        db:
+                image: postgres:11.5
+
