@@ -3,13 +3,17 @@
 Now it is possible to start a project with Docker, it is easy to set up and you do not mess up with a database. In order to install project this way you have to go through following steps:
 
 ### 0) Prepare your existing git repository 
+
 Copy the content of this folder (except for 'exclude' and 'README.md') to your Shop repository (path/to/your/shop/, to the folder containing 'shop')
+
 Copy the content of the 'exclude' file to your git exclude ```path/to/your/shop/.git/info/exclude```
 
 ### 1) Install docker and docker-compose
 
 There is a great tutorial for this over there. Check it out: 
+
 for docker (you may do only the first two steps): https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04 
+
 for docker-compose: https://docs.docker.com/compose/install/
 
 ### 2) Configure docker-compose.yml
