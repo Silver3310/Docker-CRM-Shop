@@ -17,8 +17,7 @@ def migrate():
 
 
 def make_migrations():
-    # make migrations for all apps
-    call('docker-compose run --rm web python makeappsmigrations.py'.split())
+    # make migrations
     call('docker-compose run --rm web python crm/manage.py makemigrations'.split())
 
 
@@ -53,6 +52,11 @@ def change_admin_password():
     call('docker-compose run --rm web python crm/manage.py changepassword admin'.split())
 
 
+def make_apps_migrations():
+    # make migrations for all apps
+    call('docker-compose run --rm web python makeappsmigrations.py'.split())
+
+
 def shell_plus():
     # shell plus
     call('docker-compose run --rm web python crm/manage.py shell_plus'.split())
@@ -63,7 +67,8 @@ def show_help():
     print(
         """\n        python alias_cli.py build - build the project (docker-compose build)\n
         python alias_cli.py migrate - migrate all migrations\n
-        python alias_cli.py makemigrations - make migrations for all apps\n
+        python alias_cli.py makeappsmigrations - make migrations for all apps\n
+        python alias_cli.py makemigrations - make migrations\n
         python alias_cli.py loaddata - load data from xmls that are in the dump folder\n
         python alias_cli.py createsuperuser - create super user\n
         python alias_cli.py runserver - run the server\n
@@ -124,11 +129,17 @@ if __name__ == "__main__":
         # shell plus
         shell_plus()
 
+    elif command == "makeappsmigrations":
+        # make apps migrations
+        make_apps_migrations()
+
     elif command == 'all':
         # run all commands to start a project
         build()
-        migrate()
+        # migrate()
         make_migrations()
+        migrate()
+        make_apps_migrations()
         migrate()
         load_data()
         change_admin_password()

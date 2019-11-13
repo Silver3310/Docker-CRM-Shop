@@ -17,9 +17,13 @@ def migrate():
 
 
 def make_migrations():
+    # make migrations
+    call('docker-compose run --rm web python shop/manage.py makemigrations'.split())
+
+
+def make_apps_migrations():
     # make migrations for all apps
     call('docker-compose run --rm web python makeappsmigrations.py'.split())
-    call('docker-compose run --rm web python shop/manage.py makemigrations'.split())
 
 
 def load_data():
@@ -124,13 +128,18 @@ if __name__ == "__main__":
         # shell plus
         shell_plus()
 
+    elif command == "makeappsmigrations":
+        # make apps migrations
+        make_apps_migrations()
+
     elif command == 'all':
         # run all commands to start a project
         build()
-        migrate()
+        # migrate()
         make_migrations()
+        migrate()
+        make_apps_migrations()
         migrate()
         load_data()
         change_admin_password()
         run_server()
-
