@@ -20,7 +20,7 @@ for docker-compose: <https://docs.docker.com/compose/install/>
 The docker-compose.yml contains the volume and port sections:
 ```yml
                 ports:
-                        - 8300:8000
+                        - 8200:8000
                 volumes:
                         - .:/data
                         - /path/to/your/dump:/data/crm/dump

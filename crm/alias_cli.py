@@ -8,58 +8,63 @@ from subprocess import call
 
 def build():
     # build the project
-    call('docker-compose build'.split())
+    call('docker-compose -f local.yml build'.split())
 
 
 def migrate():
     # migrate  migrations
-    call('docker-compose run --rm web python crm/manage.py migrate'.split())
+    call('docker-compose -f local.yml run --rm web python crm/manage.py migrate'.split())
 
 
 def make_migrations():
     # make migrations
-    call('docker-compose run --rm web python crm/manage.py makemigrations'.split())
+    call('docker-compose -f local.yml run --rm web python crm/manage.py makemigrations'.split())
 
 
 def load_data():
     # load data
-    call('docker-compose run --rm web python loaddata.py'.split())
+    call('docker-compose -f local.yml run --rm web python loaddata.py'.split())
 
 
 def create_super_user():
     # create super user
-    call('docker-compose run --rm web python crm/manage.py createsuperuser'.split())
+    call('docker-compose -f local.yml run --rm web python crm/manage.py createsuperuser'.split())
 
 
 def run_server():
     # run server
-    call('docker-compose up'.split())
+    call('docker-compose -f local.yml up'.split())
 
 
 def restart_db():
     # restart db
-    call('docker-compose stop db'.split())
-    call('docker-compose rm db'.split())
+    call('docker-compose -f local.yml stop db'.split())
+    call('docker-compose -f local.yml rm db'.split())
 
 
 def remove_migrations():
     # remove migrations
-    call('docker-compose run --rm web find . -path "./crm/*/migrations/*.py" -not -name "__init__.py" -delete'.split())
+    call('docker-compose -f local.yml run --rm web find . -path "./crm/*/migrations/*.py" -not -name "__init__.py" -delete'.split())
 
 
 def change_admin_password():
     # change admin password
-    call('docker-compose run --rm web python crm/manage.py changepassword admin'.split())
+    call('docker-compose -f local.yml run --rm web python crm/manage.py changepassword admin'.split())
 
 
 def make_apps_migrations():
     # make migrations for all apps
-    call('docker-compose run --rm web python makeappsmigrations.py'.split())
+    call('docker-compose -f local.yml run --rm web python makeappsmigrations.py'.split())
+
+
+def remove_images():
+    # remove images for all apps
+    call('docker-compose -f local.yml run --rm web python remove_images.py'.split())
 
 
 def shell_plus():
     # shell plus
-    call('docker-compose run --rm web python crm/manage.py shell_plus'.split())
+    call('docker-compose -f local.yml run --rm web python crm/manage.py shell_plus'.split())
 
 
 def show_help():
@@ -133,15 +138,18 @@ if __name__ == "__main__":
         # make apps migrations
         make_apps_migrations()
 
+    elif command == "removeimages":
+        # remove images
+        remove_images()
+
     elif command == 'all':
         # run all commands to start a project
         build()
-        # migrate()
-        make_migrations()
         migrate()
         make_apps_migrations()
         migrate()
         load_data()
+        remove_images()
         change_admin_password()
         run_server()
 
