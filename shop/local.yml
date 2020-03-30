@@ -1,7 +1,9 @@
 version: '2'
 services:
         web:
-                build: .
+                build:
+                        context: .
+                        dockerfile: Dockerlocal
                 command: python ./shop/manage.py runserver 0.0.0.0:8000
                 ports:
                         - 8300:8000
@@ -13,6 +15,7 @@ services:
                         - db
                 environment:
                         DATABASE_URL: postgres://postgres@db/postgres
+                        PYTHONUNBUFFERED: 1
         db:
                 image: postgres:11.5
 
