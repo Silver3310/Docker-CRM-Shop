@@ -34,6 +34,6 @@ PyPDF2==1.26.0
 PyQRCode==1.2.1
 pypng==0.0.20
 bs4==0.0.1
-opencv-python==4.1.2.30
+opencv-python==4.2.0.32
 dj-database-url
 
