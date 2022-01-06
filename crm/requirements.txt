@@ -4,7 +4,7 @@ Django==2.2.6
 djangorestframework==3.9
 djangorestframework-jsonapi==2.8.0
 coreapi==2.3.3
-celery==4.3.0
+celery==5.2.2
 redis==3.3.11
 django-simple-captcha==0.5.12
 django-imagekit==4.0.2
